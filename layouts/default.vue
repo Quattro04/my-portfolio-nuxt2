@@ -14,6 +14,11 @@
         url('/fonts/devant/Devant Horgen.svg#DevantHorgen-Medium') format('svg'); /* Legacy iOS */
     }
 
+    @font-face {
+    font-family: 'Hack';
+    src: url('/fonts/hack/Hack-Regular.ttf')  format('truetype');
+    }
+
     html {
         -ms-text-size-adjust: 100%;
         -webkit-text-size-adjust: 100%;

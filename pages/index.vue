@@ -2,25 +2,31 @@
     <div class="home h-screen flex justify-center items-center text-center overflow-hidden bg-darkblue relative">
         <Social />
         <div class="text flex flex-1 flex-col flex-wrap items-center absolute z-20 xl:items-start" @click="clicked">
-            <div class="matija flex h-48 overflow-hidden cursor-pointer" :class="' ' + nameActive">
-                <span>MATIJ</span>
-                <nuxt-link to="/about">
-                    <span>A</span>
-                    <span>BOUT</span>
-                </nuxt-link>
-                <div class="line absolute hidden xl:block" />
-                <div class="line active absolute hidden xl:block" />
-            </div>
-            <div class="jeras flex h-48 overflow-hidden cursor-pointer" :class="' ' + nameActive">
-                <span>JERA</span>
-                <nuxt-link to="/skills">
-                    <span>S</span>
-                    <span>KILLS</span>
-                </nuxt-link>
-                <div class="line absolute hidden xl:block" />
-                <div class="line active absolute hidden xl:block" />
-            </div>
-            <h1 class="text-2xl leading-8 py-8">Frontend developer with a passion for clean design</h1>
+            <transition name="slide">
+                <div v-if="shown" class="matija flex h-48 overflow-hidden cursor-pointer" :class="' ' + nameActive">
+                    <span>MATIJ</span>
+                    <nuxt-link to="/about">
+                        <span>A</span>
+                        <span>BOUT</span>
+                    </nuxt-link>
+                    <div class="line absolute hidden xl:block" />
+                    <div class="line active absolute hidden xl:block" />
+                </div>
+            </transition>
+            <transition name="slide">
+                <div v-if="shown" class="jeras flex h-48 overflow-hidden cursor-pointer" :class="' ' + nameActive">
+                    <span>JERA</span>
+                    <nuxt-link to="/skills">
+                        <span>S</span>
+                        <span>KILLS</span>
+                    </nuxt-link>
+                    <div class="line absolute hidden xl:block" />
+                    <div class="line active absolute hidden xl:block" />
+                </div>
+            </transition>
+            <transition name="fade">
+                <h1 v-if="shown" class="text-2xl leading-8 py-8">Frontend developer with a passion for clean design</h1>
+            </transition>
 
             <button class="touch touch--effect" :class="' ' + touchTrigger">
                 <i class="touch__icon fa fa-fw fa-play"></i>
@@ -28,31 +34,34 @@
             </button>
 
         </div>
-        <div class="particles hidden flex-1 absolute right-0 z-10 hidden xl:flex">
-            <div class="particle-box">
-                <img id="logo" class="next-particle hidden"
-                    data-init-position="none"
-                    data-init-direction="none"
-                    data-fade-position="none"
-                    data-fade-direction="none"
+        <transition name="fade">
+            <div v-if="shown" class="particles hidden flex-1 absolute right-0 z-10 hidden xl:flex">
+                <div class="particle-box">
+                    <img id="logo" class="next-particle hidden"
+                        data-init-position="none"
+                        data-init-direction="none"
+                        data-fade-position="none"
+                        data-fade-direction="none"
 
-                    data-particle-gap="3"
+                        data-particle-gap="3"
 
-                    data-width="900"
-                    data-height="700"
+                        data-width="900"
+                        data-height="700"
 
-                    data-max-width="700"
-                    data-max-height="500"                    
+                        data-max-width="700"
+                        data-max-height="500"                    
 
-                    data-mouse-force="30"
+                        data-mouse-force="30"
 
-                    data-gravity="0.03"
+                        data-gravity="0.03"
 
-                    data-noise="30"
-                    src="/logo_white_square.png"
-                />
+                        data-noise="30"
+                        src="/logo_white_square.png"
+                        data-not-lazy
+                    />
+                </div>
             </div>
-        </div>
+        </transition>
         <div class="top triangle absolute" />
         <div class="left triangle absolute" />
     </div>
@@ -64,12 +73,12 @@ export default {
         return {
             touchTrigger: '',
             nameActive: '',
-            interval: ''
+            interval: '',
+            shown: false
         }
     },
     mounted() {
-        // Desktop
-        var nextParticle = new NextParticle(document.all.logo)
+        this.shown = true;
 
         if (this.isMobile) {
             this.interval = setInterval(() => {
@@ -78,6 +87,10 @@ export default {
                     this.touchTrigger = ''
                 }, 500)
             }, 2000)
+        } else {
+            setTimeout(() => {
+                var nextParticle = new NextParticle(document.all.logo)
+            }, 300)
         }
     },
     methods: {
@@ -93,7 +106,7 @@ export default {
         }
     },
     transition: {
-        name: 'home',
+        name: 'fade',
         mode: 'out-in'
     }
 }
@@ -186,9 +199,9 @@ export default {
         width: 289px;
         text-shadow: 5px 5px #0d1321;
         .line {
-            transform: translateY(-90px);
+            transform: translateY(-105px);
             &.active {
-                transform: translate(-100%, -90px);
+                transform: translate(-100%, -105px);
             }
         }
         &:hover {
@@ -198,7 +211,7 @@ export default {
                 
             }
             .line.active {
-                transform: translate(0, -90px);
+                transform: translate(0, -105px);
             }
         }
         &.active {
@@ -218,9 +231,9 @@ export default {
         text-shadow: 5px 5px #0d1321;
         transition: width .3s;
         .line {
-            transform: translateY(+100px);
+            transform: translateY(85px);
             &.active {
-                transform: translate(-100%, +100px);
+                transform: translate(-100%, 85px);
             }
         }
         &:hover {
@@ -230,7 +243,7 @@ export default {
                 transform: translateX(-179px);
             }
             .line.active {
-                transform: translate(0, +100px);
+                transform: translate(0, 85px);
             }
         }
         &.active {
@@ -326,6 +339,9 @@ export default {
         }
     }
 
-    .home-enter-active, .home-leave-active { transition: opacity .5s; }
-    .home-enter, .home-leave-active { opacity: 0; }
+    .fade-enter-active, .fade-leave-active { transition: opacity .5s; }
+    .fade-enter, .fade-leave-active { opacity: 0; }
+
+    .slide-enter-active, .slide-leave-active { transition: transform .5s; }
+    .slide-enter, .slide-leave-to { transform: translateX(-400px); }
 </style>
