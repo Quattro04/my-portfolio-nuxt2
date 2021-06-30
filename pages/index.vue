@@ -1,26 +1,17 @@
 <template>
     <div class="home h-screen flex justify-center items-center text-center overflow-hidden bg-darkblue relative">
+        <Navigation />
         <Social />
         <div class="text flex flex-1 flex-col flex-wrap items-center absolute z-20 xl:items-start" @click="clicked">
-            <transition name="slide">
-                <div v-if="shown" class="matija flex h-48 overflow-hidden cursor-pointer" :class="' ' + nameActive">
-                    <span>MATIJ</span>
-                    <nuxt-link to="/about">
-                        <span>A</span>
-                        <span>BOUT</span>
-                    </nuxt-link>
-                    <div class="line absolute hidden xl:block" />
+            <transition name="fade">
+                <div v-if="shown" class="matija flex h-48">
+                    <span>MATIJA</span>
                     <div class="line active absolute hidden xl:block" />
                 </div>
             </transition>
-            <transition name="slide">
-                <div v-if="shown" class="jeras flex h-48 overflow-hidden cursor-pointer" :class="' ' + nameActive">
-                    <span>JERA</span>
-                    <nuxt-link to="/skills">
-                        <span>S</span>
-                        <span>KILLS</span>
-                    </nuxt-link>
-                    <div class="line absolute hidden xl:block" />
+             <transition name="fade">
+                <div v-if="shown" class="jeras flex h-48">
+                    <span>JERAS</span>
                     <div class="line active absolute hidden xl:block" />
                 </div>
             </transition>
@@ -143,16 +134,6 @@ export default {
             span {
                 font-size: 150px;
             }
-            .matija {
-                width: 212px;
-                height: 125px;
-                margin-top: auto;
-            }
-            .jeras {
-                width: 172px;
-                height: 125px;
-                margin-bottom: auto;
-            }
             .touch {
                 margin-bottom: auto;
             }
@@ -166,14 +147,14 @@ export default {
             width: 60%;
             height: 150%;
             top: -100%;
-            left: 12%;
+            left: 14%;
             background-color: #3e5c76;
         }
         &.left {
             width: 200%;
             height: 150%;
             top: -100px;
-            left: -1900px;
+            left: -94%;
             background-color: #1d2d44;
         }
         @media(max-width: 1279px) {
@@ -195,69 +176,11 @@ export default {
         }
     }
 
-    .matija {
-        width: 289px;
-        text-shadow: 5px 5px #0d1321;
-        .line {
-            transform: translateY(-105px);
-            &.active {
-                transform: translate(-100%, -105px);
-            }
-        }
-        &:hover {
-            > span,
-            a {
-                transform: translateX(-233px);
-                
-            }
-            .line.active {
-                transform: translate(0, -105px);
-            }
-        }
-        &.active {
-            > span,
-            a {
-                transform: translateX(-178px);
-                color: #00ff95;
-                &:first-child {
-                    color: #eee;
-                    margin-right: 20px;
-                }
-            }
-        }
+    .matija .line {
+        transform: translateY(-105px);
     }
-    .jeras {
-        width: 232px;
-        text-shadow: 5px 5px #0d1321;
-        transition: width .3s;
-        .line {
-            transform: translateY(85px);
-            &.active {
-                transform: translate(-100%, 85px);
-            }
-        }
-        &:hover {
-            width: 280px;
-            > span,
-            a {
-                transform: translateX(-179px);
-            }
-            .line.active {
-                transform: translate(0, 85px);
-            }
-        }
-        &.active {
-            width: 200px;
-            > span,
-            a {
-                transform: translateX(-152px);
-                color: #00ff95;
-                &:first-child {
-                    color: #eee;
-                    margin-right: 20px;
-                }
-            }
-        }
+    .jeras .line {
+        transform: translateY(85px);
     }
 
     .matija,
@@ -266,13 +189,9 @@ export default {
         .line {
             width: 150px;
             height: 3px;
-            background-color: #0d1321;
             left: -193px;
             top: 40%;
-            transition: transform .3s;
-            &.active {
-                background-color: #00ff95;
-            }
+            background-color: #00ff95;
         }   
     }
 
