@@ -15,12 +15,27 @@ I will try to describe in detail how I programmed this extension.
 
 First thing I decided to do was make a basic extension that can detect site URL and just display it in the console. I made a background script for that in `background.js`:
 
-`chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {`
+```javascript
+chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
+    if (changeInfo.status == 'complete') {
+        console.log('Site URL ', tab.url)
+    }
+})
+```
 
-`    if (changeInfo.status == 'complete') {`
+This uses `tabs` API to get an active tab and then if tab is fully loaded, displays tab URL in the console. Now let's make an actual extension to use this background script on. We'll need another file, `manifest.json`:
 
-`        console.log('Got site url: ', tab,url)`
+```json
+{
+    "name": "SyncedVODs",
+    "description": "Sync Twitch VODs with your friends!",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["tabs"]
+}
+```
 
-`    }`
-
-`})`
+Here we defined extension name, description, version, witch script to use for background script and also specified permissions. Because we used `chrome.tabs` API, we'll need `tabs` permission.
