@@ -1,5 +1,5 @@
 ---
-title: SyncedVODs for Twitch Chrome Extension
+title: Synced VODs for Twitch Chrome Extension
 date: 2021-06-30T22:16:05.896Z
 description: Developing a Chrome extension to help you sync Twitch VODs with your friend.
 ---
@@ -12,6 +12,8 @@ I will try to describe in detail how I programmed this extension.
 
 
 ### Programming
+
+#### Basic extension
 
 First thing I decided to do was make a basic extension that can detect site URL and just display it in the console. I made a background script for that in `background.js`:
 
@@ -27,7 +29,7 @@ This uses `tabs` API to get an active tab and then if tab is fully loaded, displ
 
 ```json
 {
-    "name": "SyncedVODs",
+    "name": "Synced VODs for Twitch",
     "description": "Sync Twitch VODs with your friends!",
     "version": "1.0",
     "manifest_version": 3,
@@ -39,3 +41,7 @@ This uses `tabs` API to get an active tab and then if tab is fully loaded, displ
 ```
 
 Here we defined extension name, description, version, witch script to use for background script and also specified permissions. Because we used `chrome.tabs` API, we'll need `tabs` permission.
+
+Now we need to add the extension to chrome and we do that by opening chrome and going to `Settings -> Extensions -> Developer Mode ON -> Load unpacked` then select the extension folder that includes the above files. You will now see your extension on the list and can inspect service workers. This will open the console which will display the URL of any site we visit.
+
+![Chrome extension panel](/img/extension.jpg "Chrome extension panel")
