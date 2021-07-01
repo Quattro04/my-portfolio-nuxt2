@@ -1,5 +1,5 @@
 ---
-title: Synced VODs for Twitch Chrome Extension
+title: Chrome Extension - Synced VODs for Twitch
 date: 2021-06-30T22:16:05.896Z
 description: Developing a Chrome extension to help you sync Twitch VODs with your friend.
 ---
