@@ -7,9 +7,16 @@ description: Developing a Chrome extension to help you sync Twitch VODs with you
 
 Have you ever had a problem where you and your friend are watching a VOD on Twitch but you just don't know where exactly he's at and have to continuously ask him to tell you the time so you can watch the VOC in sync? This chrome extension aims to solve this problem by letting you see which VOD your friend is watching and the exact timestamp he's at.
 
-I will try to describe in detail how I programmed this extension.
+Below you can see the architecture and data flow between multiple extensions and an instance of Node.js server:
 
-# Programming
+![Architecture - data flow](/img/schema.png "Architecture - data flow")
+
+1. User is watching Twitch VOD and has Synced VODs extension installed
+2. Extension is sending data about VOD's current timestamp to the server
+3. Server receives information through Websocket connection
+4. Server sends information to all other Synced VODs extensions connected to it
+
+# Let's go!
 
 ## Basic extension
 
@@ -43,3 +50,7 @@ Here we defined extension name, description, version, witch script to use for ba
 Now we need to add the extension to chrome and we do that by opening chrome and going to `Settings -> Extensions -> Developer Mode ON -> Load unpacked` then select the extension folder that includes the above files. You will now see your extension on the list and can inspect service workers. This will open the console which will display the URL of any site we visit.
 
 ![Chrome extension panel](/img/extension.jpg "Chrome extension panel")
+
+## Node.js server
+
+We're going to need a way for extensions to communicate with each other
