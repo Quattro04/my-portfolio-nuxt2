@@ -94,6 +94,6 @@ ws.onmessage = (event) => {
 };
 ```
 
-If we run the extension, it should return server time every second:
+If we run the extension, it should log time returned from server every second:
 
 ![Websockets intro](/img/sockets.jpg "Extension receives server response")
