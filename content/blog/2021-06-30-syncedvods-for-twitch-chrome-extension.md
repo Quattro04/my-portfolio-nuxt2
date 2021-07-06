@@ -16,7 +16,7 @@ Below you can see the architecture and data flow between multiple extensions and
 3. Server receives information through Websocket connection
 4. Server sends information to all other Synced VODs extensions connected to it
 
-# Let's go!
+# Implementation
 
 ## Basic extension
 
@@ -53,4 +53,47 @@ Now we need to add the extension to chrome and we do that by opening chrome and 
 
 ## Node.js server
 
-We're going to need a way for extensions to communicate with each other
+First we're going to implement a basic Node.js server that sends current time to all connected clients through **Websocket**. It will be hosted on [Heroku](heroku.com), which is a free hosting service.
+
+The server code that initializes Websocket, listens for connections on port 3000 and sends current time to all connected clients every second:
+
+```javascript
+const express = require('express');
+const { Server } = require('ws');
+
+const PORT = process.env.PORT || 3000;
+
+const server = express()
+    .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const wss = new Server({ server });
+
+wss.on('connection', (ws) => {
+    console.log('Client connected');
+    ws.on('close', () => console.log('Client disconnected'));
+});
+
+setInterval(() => {
+    wss.clients.forEach((client) => {
+        client.send(new Date().toTimeString());
+    });
+}, 1000);
+```
+
+We can simply add this to a git repo and then in Heroku dashboard, add App from this repo. This will deploy the code and Heroku provides us with the dedicated URL this server is reachable at.
+
+Back in our extension code, we add the below code to the` background.js` script:
+
+```javascript
+let HOST = "wss://" + herokuAppUrl
+let ws = new WebSocket(HOST);
+let el;
+
+ws.onmessage = (event) => {
+    console.log('Recieved data ',  event.data)
+};
+```
+
+If we run the extension, it should return server time every second:
+
+![Websockets intro](/img/sockets.jpg "Extension receives server response")
