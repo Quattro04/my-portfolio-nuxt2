@@ -3,7 +3,7 @@ title: Chrome Extension - Synced VODs for Twitch
 date: 2021-06-30T22:16:05.896Z
 description: Developing a Chrome extension to help you sync Twitch VODs with your friend.
 ---
-# Introduction
+### Introduction
 
 Have you ever had a problem where you and your friend are watching a VOD on Twitch but you just don't know where exactly he's at and have to continuously ask him to tell you the time so you can watch the VOC in sync? This chrome extension aims to solve this problem by letting you see which VOD your friend is watching and the exact timestamp he's at.
 
@@ -16,9 +16,9 @@ Below you can see the architecture and data flow between multiple extensions and
 3. Server receives information through Websocket connection
 4. Server sends information to all other Synced VODs extensions connected to it
 
-# Implementation
+### Implementation
 
-## Basic extension
+#### Basic extension
 
 First thing I decided to do was make a basic extension that can detect site URL and just display it in the console. I made a background script for that in `background.js`:
 
@@ -51,7 +51,7 @@ Now we need to add the extension to chrome and we do that by opening chrome and 
 
 ![Chrome extension panel](/img/extension.jpg "Chrome extension panel")
 
-## Node.js server
+#### Node.js server
 
 First we're going to implement a basic Node.js server that sends current time to all connected clients through **Websocket**. It will be hosted on [Heroku](heroku.com), which is a free hosting service.
 
@@ -97,7 +97,7 @@ If we run the extension, it should log time returned from server every second:
 
 ![Websockets intro](/img/sockets.jpg "Extension receives server response")
 
-## Sending the data
+#### Sending the data
 
 Now that we have Node.js server and chrome extension that connect using Websockets, we need to make sure we send the correct data.
 
@@ -160,7 +160,7 @@ ws.onmessage = (event) => {
 };
 ```
 
-## Popup
+#### Popup
 
 For the popup, we make a simple HTML `popup.html` that displays the url and the timestamp we get from Node.js:
 
@@ -195,7 +195,7 @@ And thats it! When another user that has the extension installed is watching a T
 
 ![Finalized extension](/img/ext.jpg "Finalized extension")
 
-# Conclusion
+### Conclusion
 
 This is just a basic version of the extension, possible additional features include:
 
