@@ -22,4 +22,7 @@ collections:
         widget: 'image'
         required: false
         tagname: ''
+      - label: 'Code'
+        name: 'code'
+        widget: 'code'
       - { label: 'Body', name: 'body', widget: 'markdown' }
