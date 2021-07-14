@@ -1,9 +1,8 @@
 <template>
     <div class="about h-screen flex justify-center items-center text-center overflow-hidden bg-darkblue relative">
-        <Navigation />
         <Social />
         <div class="container relative flex justify-between flex-col-reverse p-10 xl:flex-row xl:items-center xl:p-0">
-            <div class="flex flex-col justify-center items-start text-white xl:mr-20">
+            <div class="flex flex-col justify-center items-start text-offwhite xl:mr-20">
                 <div class="flex justify-start">
                     <h1>hey</h1>
                     <h2 class="ml-3 text-green xl:ml-8">there.</h2>
@@ -29,7 +28,6 @@ export default {
 
 <style lang="scss">
     .about {
-        font-family: 'Poppins', sans-serif;
         .loop {
             left: -100px;
             top: 80px;

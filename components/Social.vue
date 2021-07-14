@@ -1,5 +1,5 @@
 <template>
-    <div class="social flex justify-center items-center text-grey absolute text-3xl top-0 right-0 px-6 py-4 m-8 z-20 xl:text-white">
+    <div class="social flex justify-center items-center text-grey absolute text-3xl top-0 right-0 px-6 py-4 m-8 z-20 xl:text-offwhite">
         <a class="icon px-4 py-2 mr-8" href="https://github.com/Quattro04" target="_blank"><font-awesome-icon :icon="['fab', 'github']"/></a>
         <a class="icon px-4 py-2 mr-8" href="https://www.linkedin.com/in/matija-jeras/" target="_blank"><font-awesome-icon :icon="['fab', 'linkedin-in']"/></a>
         <a class="icon px-4 py-2" href="https://www.facebook.com/matija.jeras01" target="_blank"><font-awesome-icon :icon="['fab', 'facebook-f']"/></a>

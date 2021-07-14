@@ -1,5 +1,6 @@
 <template>
     <div class="main">
+        <Navigation />
         <Nuxt />
     </div>
 </template>
@@ -40,5 +41,6 @@
 
     .main {
         background-color: #0d1321;
+        font-family: 'Poppins', sans-serif;
     }
 </style>

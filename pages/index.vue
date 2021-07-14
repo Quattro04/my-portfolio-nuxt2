@@ -1,6 +1,5 @@
 <template>
     <div class="home h-screen flex justify-center items-center text-center overflow-hidden bg-darkblue relative">
-        <Navigation />
         <Social />
         <div class="text flex flex-1 flex-col flex-wrap items-center absolute z-20 xl:items-start" @click="clicked">
             <transition name="fade">
@@ -109,6 +108,7 @@ export default {
 </script>
 
 <style lang="scss">
+.home {
     .text {
         left: 10%;
         color: #eee;
@@ -121,9 +121,6 @@ export default {
             -webkit-touch-callout: none; /* iOS Safari */
             -webkit-user-select: none; /* Safari */
             user-select: none;
-        }
-        h1 {
-            font-family: 'Poppins', sans-serif;
         }
         @media(max-width: 1279px) {
             top: 100px;
@@ -268,4 +265,5 @@ export default {
 
     .slide-enter-active, .slide-leave-active { transition: transform .5s; }
     .slide-enter, .slide-leave-to { transform: translateX(-400px); }
+}
 </style>
