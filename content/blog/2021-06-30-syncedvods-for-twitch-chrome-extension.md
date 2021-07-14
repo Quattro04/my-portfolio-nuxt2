@@ -14,10 +14,10 @@ Below you can see the architecture and data flow between multiple extensions and
 
 ![Architecture - data flow](/img/schema.png "Architecture - data flow")
 
-1. User is watching Twitch VOD and has Synced VODs extension installed
-2. Extension is sending data about VOD's current timestamp to the server
-3. Server receives information through Websocket connection
-4. Server sends information to all other Synced VODs extensions connected to it
+* 1. User is watching Twitch VOD and has Synced VODs extension installed
+* 2. Extension is sending data about VOD's current timestamp to the server
+* 3. Server receives information through Websocket connection
+* 4. Server sends information to all other Synced VODs extensions connected to it
 
 ### Implementation
 
@@ -204,6 +204,6 @@ This is just a basic version of the extension, possible additional features incl
 
 * Support for more than 2 users, possibly with usernames for identification
 * Popup styling and a button that opens the VOD with at a the correct time directly
-* Include other information of what a user is doing on Twitch
+* Include other information of what a user is doing on Twitch (or even other websites)
 
 Thanks for reading and see you in the next one 😊
