@@ -14,10 +14,10 @@ Below you can see the architecture and data flow between multiple extensions and
 
 ![Architecture - data flow](/img/schema.png "Architecture - data flow")
 
-* 1. User is watching Twitch VOD and has Synced VODs extension installed
-* 2. Extension is sending data about VOD's current timestamp to the server
-* 3. Server receives information through Websocket connection
-* 4. Server sends information to all other Synced VODs extensions connected to it
+* 1 - User is watching Twitch VOD and has Synced VODs extension installed
+* 2 - Extension is sending data about VOD's current timestamp to the server
+* 3 - Server receives information through Websocket connection
+* 4 - Server sends information to all other Synced VODs extensions connected to it
 
 ### Implementation
 
