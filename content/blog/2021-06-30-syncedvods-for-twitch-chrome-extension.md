@@ -5,6 +5,7 @@ description: Developing a Chrome extension to help you sync Twitch VODs with you
 code:
   code: ""
   lang: javascript
+image: /img/ext.jpg
 ---
 ### Introduction
 
