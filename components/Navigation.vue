@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         checkBg() {
-            if (window.location.href.includes('/blog/')) this.background = true
+            if (window.location.href.includes('/blog/') || window.location.href.includes('/skills')) this.background = true
             else this.background = false
         }
     },
@@ -49,6 +49,15 @@ export default {
 
         &.background {
             background-color: #0d1321;
+        }
+        @media(max-width: 1279px) {
+            width: 100%;
+            padding: 0;
+            .link {
+                padding: 2rem 0;
+                flex: 1 1 0;
+                font-size: 14px;
+            }
         }
     }
 </style>

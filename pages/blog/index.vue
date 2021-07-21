@@ -1,12 +1,12 @@
 <template>
-    <div class="blog container h-screen flex flex-col bg-darkblue relative p-40 mx-auto">
-        <NuxtLink :to="'/blog/'+post.slug" class="item flex items-end bg-lightblue" v-for="post of posts" :key="post.slug">
-            <div class="flex flex-1 flex-col h-full justify-between p-5">
-                <span class="text-green text-xl">{{ post.title }}</span>
-                <span class="text-offwhite">{{ post.description }}</span>
-                <span class="text-teal">Read more</span>
+    <div class="blog container h-screen flex flex-col bg-darkblue relative px-10 py-32 xl:p-40 mx-auto">
+        <NuxtLink :to="'/blog/'+post.slug" class="item flex flex-col md:flex-row items-end bg-lightblue" v-for="post of posts" :key="post.slug">
+            <div class="flex flex-1 flex-col w-full h-full justify-between p-5">
+                <span class="text-green text-xl text-left">{{ post.title }}</span>
+                <span class="text-offwhite text-left">{{ post.description }}</span>
+                <span class="text-teal ml-auto">Read more</span>
             </div>
-            <div class="flex flex-1 h-full justify-center bg-black">
+            <div class="flex flex-1 w-full h-full justify-center bg-black">
                 <img :src="post.image">
             </div>
         </NuxtLink>

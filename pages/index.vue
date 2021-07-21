@@ -1,28 +1,22 @@
 <template>
     <div class="home h-screen flex justify-center items-center text-center overflow-hidden bg-darkblue relative">
         <Social />
-        <div class="text flex flex-1 flex-col flex-wrap items-center absolute z-20 xl:items-start" @click="clicked">
+        <div class="text flex flex-1 flex-col flex-wrap items-center absolute z-20 xl:items-start">
             <transition name="fade">
-                <div v-if="shown" class="matija flex h-48">
+                <div v-if="shown" class="matija flex">
                     <span>MATIJA</span>
                     <div class="line active absolute hidden xl:block" />
                 </div>
             </transition>
              <transition name="fade">
-                <div v-if="shown" class="jeras flex h-48">
+                <div v-if="shown" class="jeras flex">
                     <span>JERAS</span>
                     <div class="line active absolute hidden xl:block" />
                 </div>
             </transition>
             <transition name="fade">
-                <h1 v-if="shown" class="text-2xl leading-8 py-8">Frontend developer with a passion for clean design</h1>
+                <h1 v-if="shown" class="text-lg xl:text-2xl leading-8 py-8">Frontend developer with a passion for clean design</h1>
             </transition>
-
-            <button class="touch touch--effect" :class="' ' + touchTrigger">
-                <i class="touch__icon fa fa-fw fa-play"></i>
-                <span class="touch__text">Play</span>
-            </button>
-
         </div>
         <transition name="fade">
             <div v-if="shown" class="particles hidden flex-1 absolute right-0 z-10 hidden xl:flex">
@@ -66,39 +60,15 @@ export default {
     },
     data() {
         return {
-            touchTrigger: '',
-            nameActive: '',
             interval: '',
             shown: false
         }
     },
     mounted() {
         this.shown = true;
-
-        if (this.isMobile) {
-            this.interval = setInterval(() => {
-                this.touchTrigger = 'touch--click'
-                setTimeout(() => {
-                    this.touchTrigger = ''
-                }, 500)
-            }, 2000)
-        } else {
-            setTimeout(() => {
-                var nextParticle = new NextParticle(document.all.logo)
-            }, 300)
-        }
-    },
-    methods: {
-        clicked() {
-            if (this.isMobile) {
-                this.nameActive == '' ? this.nameActive = 'active' : this.nameActive = ''
-            }
-        }
-    },
-    computed: {
-        isMobile() {
-            return window.innerWidth < 1280
-        }
+        setTimeout(() => {
+            var nextParticle = new NextParticle(document.all.logo)
+        }, 300)
     },
     transition: {
         name: 'fade',
@@ -134,7 +104,7 @@ export default {
                 margin-bottom: auto;
             }
             span {
-                font-size: 150px;
+                font-size: 120px;
             }
             .touch {
                 margin-bottom: auto;
@@ -195,56 +165,6 @@ export default {
             top: 40%;
             background-color: #00ff95;
         }   
-    }
-
-    // ------------------ Touch indicator
-    .touch {
-        position: relative;
-        display: inline-block;
-        margin: 1em;
-        padding: 0;
-        border: none;
-        background: none;
-        color: #286aab;
-        font-size: 1.4em;
-        transition: color 0.7s;
-    }
-
-    .touch.touch--click,
-    .touch:focus {
-        outline: none;
-        color: #3c8ddc;
-    }
-
-    .touch__icon {
-        display: block;
-    }
-
-    .touch__text {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    .touch::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin: -35px 0 0 -35px;
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    .touch--effect::after {
-        background: rgba(101, 158, 211, 0.1);
-    }
-
-    .touch--effect.touch--click::after {
-        animation: anim-effect 0.5s forwards;
     }
 
     @keyframes anim-effect {

@@ -74,5 +74,11 @@ export default {
                 border-radius: 50%;
             }
         }
+
+        @media(max-width: 1279px) {
+            .container {
+                padding: 85px 20px 50px;
+            }
+        }
     }
 </style>
