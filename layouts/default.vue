@@ -8,16 +8,8 @@
 <style>
 
     @font-face {
-    font-family: 'Devant Horgen';
-    src: url('/fonts/devant/Devant Horgen.eot'); /* IE9 Compat Modes */
-    src: url('/fonts/devant/Devant Horgen.woff') format('woff'), /* Modern Browsers */
-        url('/fonts/devant/Devant Horgen.ttf')  format('truetype'), /* Safari, Android, iOS */
-        url('/fonts/devant/Devant Horgen.svg#DevantHorgen-Medium') format('svg'); /* Legacy iOS */
-    }
-
-    @font-face {
-    font-family: 'Hack';
-    src: url('/fonts/hack/Hack-Regular.ttf')  format('truetype');
+        font-family: 'Hack';
+        src: url('/fonts/hack/Hack-Regular.ttf')  format('truetype');
     }
 
     html {

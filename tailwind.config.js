@@ -3,6 +3,7 @@ module.exports = {
         colors: {
             teal: '#5faac7',
             green: '#00ff95',
+            darkgreen: '#00d37b',
             dark: '#303030',
             grey: '#aaa',
             white: '#fff',

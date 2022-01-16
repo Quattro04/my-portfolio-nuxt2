@@ -1,9 +1,10 @@
 <template>
-    <nav :class="{background: background}" class="navigation w-5/6 justify-center flex text-md text-offwhite font-bold absolute top-0 z-20 p-10">
+    <nav :class="{background: background}" class="navigation w-5/6 justify-center flex text-md text-offwhite font-bold absolute top-0 z-20 p-10 no-print">
         <nuxt-link to="/" class="link px-10">Home</nuxt-link>
         <nuxt-link to="/skills" class="link px-10">Skills</nuxt-link>
         <nuxt-link to="/about" class="link px-10">About</nuxt-link>
-        <nuxt-link to="/blog" class="link px-10">Blog</nuxt-link>
+        <!-- <nuxt-link to="/blog" class="link px-10">Blog</nuxt-link> -->
+        <nuxt-link to="/cv" class="link px-10">CV</nuxt-link>
     </nav>
 </template>
 
@@ -19,8 +20,15 @@ export default {
     },
     methods: {
         checkBg() {
-            if (window.location.href.includes('/blog/') || window.location.href.includes('/skills')) this.background = true
-            else this.background = false
+            if (window.location.href.includes('/blog/') || window.location.href.includes('/skills') || window.location.href.includes('/cv')) {
+                setTimeout(() => {
+                    this.background = true
+                }, 500)
+            } else {
+                setTimeout(() => {
+                    this.background = false
+                }, 500)
+            }
         }
     },
     watch:{

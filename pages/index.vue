@@ -3,19 +3,13 @@
         <Social />
         <div class="text flex flex-1 flex-col flex-wrap items-center absolute z-20 xl:items-start">
             <transition name="fade">
-                <div v-if="shown" class="matija flex">
-                    <span>MATIJA</span>
-                    <div class="line active absolute hidden xl:block" />
-                </div>
+                <div v-if="shown" class="flex name">Matija</div>
             </transition>
              <transition name="fade">
-                <div v-if="shown" class="jeras flex">
-                    <span>JERAS</span>
-                    <div class="line active absolute hidden xl:block" />
-                </div>
+                <div v-if="shown" class="flex surname">Jeras</div>
             </transition>
             <transition name="fade">
-                <h1 v-if="shown" class="text-lg xl:text-2xl leading-8 py-8">Frontend developer with a passion for clean design</h1>
+                <h1 v-if="shown" class="text-lg xl:text-2xl leading-8 py-8">Software developer with a passion for frontend</h1>
             </transition>
         </div>
         <transition name="fade">
@@ -86,7 +80,6 @@ export default {
         span,
         a {
             display: flex;
-            font-size: 200px;
             transition: all .3s;
             -webkit-touch-callout: none; /* iOS Safari */
             -webkit-user-select: none; /* Safari */
@@ -126,7 +119,7 @@ export default {
             width: 200%;
             height: 150%;
             top: -100px;
-            left: -94%;
+            left: -100%;
             background-color: #1d2d44;
         }
         @media(max-width: 1279px) {
@@ -148,23 +141,12 @@ export default {
         }
     }
 
-    .matija .line {
-        transform: translateY(-105px);
-    }
-    .jeras .line {
-        transform: translateY(85px);
-    }
-
-    .matija,
-    .jeras {
-        font-family: 'Devant Horgen', sans-serif;
-        .line {
-            width: 150px;
-            height: 3px;
-            left: -193px;
-            top: 40%;
-            background-color: #00ff95;
-        }   
+    .name,
+    .surname {
+        font-size: 6rem;
+        @media(max-width: 1279px) {
+            font-size: 3rem;
+        }
     }
 
     @keyframes anim-effect {

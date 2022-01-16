@@ -7,10 +7,12 @@
                     <h1>hey</h1>
                     <h2 class="ml-3 text-green xl:ml-8">there.</h2>
                 </div>
-                <p class="text-left mt-5">I am Matija Jeras, a web developer focused on frontend code that enables me to program a clean and intuitive web based applications.</p>
+                <p class="text-left mt-5">I am Matija Jeras, a software developer focused on frontend code that enables me to program a clean and intuitive web based applications.</p>
                 <p class="text-left mt-8">I'm always looking for new challenges and don't like to stagnate by doing easy repetitive work. That way my variety of skills is continuosly expanding, which I think is mandatory in today's fast changing technology.</p>
             </div>
-            <img class="me" src="/me+.png" />
+            <div class="me-wrapper">
+                <img class="me" src="/me.png" />
+            </div>
             <img class="absolute right-0 bottom-0 hidden xl:block" src="/image-line.png" />
         </div>
         <img class="loop absolute hidden xl:block" src="/loop.png" data-not-lazy />
@@ -46,10 +48,20 @@ export default {
             }
         }
         img.me {
+            width: 100%;
+            height: 100%;
+            @media(max-width: 1279px) {
+                width: 300px;
+                height: auto;
+            }
+        }
+        .me-wrapper {
+            flex: 0 0 600px;
+            height: 492px;
             margin-right: -6.45rem;
             @media(max-width: 1279px) {
                 margin-right: 0;
-                width: 300px;
+                flex: 1 1 300px;
             }
         }
     }
