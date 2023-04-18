@@ -26,3 +26,23 @@ Before we dive into coding, let's make sure you have the following prerequisites
 ## Getting Started
 
 To get started, create a new directory for your project and navigate into it. Then, initialize your project using npm by running the following command:
+
+```
+npm init -y
+```
+
+This will create a new package.json file with default values. Next, install the following packages:
+
+```
+npm install express lowdb multer morgan cors
+```
+
+Here's what each package does:
+
+* Express: A web application framework for Node.js that provides a set of features for building web applications.
+* lowdb: A lightweight JSON database for Node.js that provides a simple way to store and retrieve data.
+* multer: A middleware for handling file uploads in Express.
+* morgan: A logging middleware for Express that logs HTTP requests to the console.
+* cors: A middleware for enabling CORS (Cross-Origin Resource Sharing) in Express.
+
+Once you've installed these packages, create a new file called `server.js` and add the following code:
