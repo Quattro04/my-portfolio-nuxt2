@@ -1,5 +1,5 @@
 ---
-title: Making your own music streaming server with Node.js and Next.js
+title: Making your own music streaming server with Node.js and Next.js for free
 date: 2023-04-18T14:37:32.111Z
 description: Tired of paying for music? Let's dive into detailed guide about
   writing your own music streaming service which will take care of that for
