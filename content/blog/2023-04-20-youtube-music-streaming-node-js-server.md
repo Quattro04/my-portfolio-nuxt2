@@ -12,9 +12,13 @@ W﻿e will make a simple Node.js server that gets YouTube video id on request an
 
 ## Prerequisites
 
-F﻿or this Node.js application, we will need 
+F﻿or this Node.js application, we will need ffmpeg executable, which you can get [here](https://www.ffmpeg.org/download.html)
 
-To get started, create a new directory for your project and navigate into it. Then, initialize your project using npm by running the following command:
+D﻿ownload the correct one for you system, make a new directory which will be this project's root directory, and place it inside.
+
+## G﻿etting started
+
+Navigate to your project dir and initialize your project using npm by running the following command:
 
 ```
 npm init
@@ -33,3 +37,71 @@ Here's what each package does:
 * [fluent-ffmpeg](https://www.npmjs.com/package/fluent-ffmpeg): Easy to use Node.js friendly ffmpeg module - to get audio from video.
 * [stream](https://www.npmjs.com/package/stream): Module for streaming.
 * [fs](https://www.npmjs.com/package/fs): File system module.
+
+N﻿ext, create index.js file that will be your main Node.js file and paste the following code inside:
+
+```
+// index.js
+
+const express = require('express');
+const ytdl = require('ytdl-core')
+const FFmpeg = require('fluent-ffmpeg')
+const { PassThrough } = require('stream')
+const fs = require('fs')
+const app = express();
+
+const toAudioStream = (uri, opt) => {
+    opt = {
+        ...opt,
+        videoFormat: 'mp4',
+        quality: 'lowest',
+        audioFormat: 'mp3',
+        filter (format) {
+            return format.container === opt.videoFormat && format.audioBitrate
+        }
+    }
+
+    const video = ytdl(uri, opt)
+    const { file, audioFormat } = opt
+    const stream = file ? fs.createWriteStream(file) : new PassThrough()
+    const ffmpeg = new FFmpeg(video)
+
+    process.nextTick(() => {
+        const output = ffmpeg.format(audioFormat).pipe(stream)
+    
+        ffmpeg.once('error', error => stream.emit('error', error))
+        output.once('error', error => {
+            video.end()
+            stream.emit('error', error)
+        })
+    })
+
+    stream.video = video
+    stream.ffmpeg = ffmpeg
+
+    return stream
+}
+
+const streamify = async (url, res) => {
+    toAudioStream(url).pipe(res);
+}
+
+app.get('/', async (req, res) => {
+    const id = req.query.id;
+
+    try {
+        await streamify(`https://youtube.com/watch?v=${id}`, res)
+    } catch (err) {
+        console.error(err)
+        if (!res.headersSent) {
+            res.writeHead(500)
+            res.end('internal system error')
+        }
+    }
+});
+
+app.listen(3000, () => {
+    console.log('Server listening on port 3000');
+});
+
+```
