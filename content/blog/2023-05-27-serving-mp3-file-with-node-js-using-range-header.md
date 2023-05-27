@@ -49,3 +49,5 @@ server.listen(process.env.PORT || 3000, () => {
 ```
 
 W﻿e can see that we have one endpoint: /songs/:name, where request will come in for the song. In our /public/songs folder, we have best-song.mp3 file, which we will send to user in chunks in this example.
+
+Let's implement the endpoint so it will do just that.
