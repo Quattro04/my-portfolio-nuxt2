@@ -48,6 +48,43 @@ server.listen(process.env.PORT || 3000, () => {
 });
 ```
 
-W﻿e can see that we have one endpoint: /songs/:name, where request will come in for the song. In our /public/songs folder, we have best-song.mp3 file, which we will send to user in chunks in this example.
+W﻿e can see that we have one endpoint: /songs/:name, where request will come in for the song. In our /public/songs folder, we have best-song.mp3 file, which we will send to user in chunks.
 
 Let's implement the endpoint so it will do just that.
+
+```javascript
+const name = req.params.name;
+const filePath = join(__dirname, `/public/songs/${name}`);
+const stat = fs.statSync(filePath);
+const fileSize = stat.size; // Whole file size in bytes
+const range = req.headers.range;
+```
+
+F﻿irst we get name parameter from request params and with file path, get the file's size. We will need it for later.
+
+W﻿e also get the range value, which is set in the headers. This value will be a string and look like this:
+
+```
+Range bytes=0-500
+```
+
+T﻿he client here wants first 500 bytes of the song instead of the whole song. Let's do that next.
+
+```javascript
+const rangeArr = range.split('=')[1].split('-'); // Parse start and end bytes from Range header in an array
+
+const start = rangeArr[0]; // First value in array is start of bytes
+const end = rangeArr[1];   // Second value in array is end of bytes
+
+const chunkSize = (end - start); // Size of the chunk to send
+const fileStream = fs.createReadStream(filePath, { start, end }); // Actual chunk of the song we'll send
+const headers = {
+    'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+    'Accept-Ranges': 'bytes',
+    'Content-Length': chunkSize,
+    'Content-Type': 'audio/mpeg',
+};
+
+res.writeHead(206, headers); // Write status code and headers to response
+fileStream.pipe(res); // Send the chunk over to client
+```
