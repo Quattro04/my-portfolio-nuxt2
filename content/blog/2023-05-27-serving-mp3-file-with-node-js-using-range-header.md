@@ -68,7 +68,7 @@ W﻿e also get the range value, which is set in the headers. This value will be 
 Range bytes=0-500
 ```
 
-T﻿he client here wants first 500 bytes of the song instead of the whole song. Let's do that next.
+T﻿he client here wants first 500 bytes of the song instead of the whole song. Let's implement our endpoint to return the amount of bytes that user requests.
 
 ```javascript
 const rangeArr = range.split('=')[1].split('-'); // Parse start and end bytes from Range header in an array
@@ -88,3 +88,38 @@ const headers = {
 res.writeHead(206, headers); // Write status code and headers to response
 fileStream.pipe(res); // Send the chunk over to client
 ```
+
+With this we should correctly return the requested chunk of an mp3 song.
+
+Now let's focus on client side to utilize this endpoint and implement an HTML audio element, that will play this mp3 in chunks.
+
+## C﻿lient side (react)
+
+I﻿n this example I will use react component to utilize our Node.js server endpoint, but we could use any form of frontend architecture to achieve this.
+
+```typescript
+export default function MyComponent() {
+
+    const [songUrl, setSongUrl] = useState('');
+
+    useEffect(() => {
+        setSongUrl('http://localhost:3000/songs/best-song.mp3')
+    }, [])
+
+    return (
+        <div>
+            <audio src={songUrl} controls autoPlay />
+        </div>
+    )
+}
+```
+
+T﻿he above component will fetch the song if our Node server is listening on port 3000 and play it in the HTML audio element.
+
+I﻿t works out of the box because HTML audio sends the initial request with range headers and then follows up with the subsequent requests for next chunks of bytes.
+
+# C﻿onclusion
+
+I﻿ hope you enjoyed this short guide into utilizing the Range header to its full potential.
+
+S﻿ee you next time and happy coding!
